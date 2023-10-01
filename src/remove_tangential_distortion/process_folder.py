@@ -3,30 +3,8 @@ import cv2
 import os
 import tqdm
 
-import logging
-logger = logging.getLogger(__name__)
-logging.basicConfig(format="[%(filename)s:%(lineno)s %(funcName)s()] %(message)s")
-#logger.setLevel(logging.CRITICAL)
-#logger.setLevel(logging.ERROR)
-#logger.setLevel(logging.WARNING)
-#logger.setLevel(logging.INFO)
-logger.setLevel(logging.DEBUG)
 
-try:
-    from google.colab.patches import cv2_imshow
-    IN_COLAB = True
-except:
-    IN_COLAB = False
-logger.info(f"Running in Google Colab: {IN_COLAB}")
 
-def process_sequence(input_sequence_prefix="/tmp/input/",
-        output_sequence_prefix="/tmp/output/",
-        img_extension=".jpg",
-        first_img_index=0,
-        last_img_index=120):
-    list_of_imagenames = np.array([img for img in os.listdir(input_sequence_prefix) if img_extension in img])
-    total_imgs = len(list_of_imagenames)
-    
 def detect_seq(
         input_sequence_prefix="/tmp/input/",
         output_sequence_prefix="/tmp/output/",
@@ -59,7 +37,7 @@ def detect_seq(
             if IN_COLAB:
                 cv2_imshow(pose_img)
 
-            cv2.imwrite(f"{output_sequence_prefix}{image_name}", pose_img)
+            cv2.imwrite(f"{output_sequence_prefix}{image_name}", pose_img)w
             
     ratio = founds/total_imgs
 
