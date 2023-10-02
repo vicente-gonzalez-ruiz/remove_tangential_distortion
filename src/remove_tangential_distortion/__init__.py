@@ -11,7 +11,7 @@ logging.basicConfig(format="[%(filename)s:%(lineno)s %(funcName)s()] %(message)s
 #logger.setLevel(logging.ERROR)
 #logger.setLevel(logging.WARNING)
 logger.setLevel(logging.INFO)
-#logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.DEBUG)
 
 try:
     from google.colab.patches import cv2_imshow
@@ -64,14 +64,14 @@ def sequence_trapezoidal_warping(
     total_imgs = len(list_of_imagenames)
     for image_name in list_of_imagenames:
         img_name = f"{input_sequence_prefix}/{image_name}"
-        logger.debug(f"Warping {img_name}")
-        image = cv2.imread(img_name)
+        image = cv2.imread(img_name, cv2.IMREAD_UNCHANGED)
+        logger.debug(f"Warping {img_name} {image.dtype} {np.min(image)} {np.max(image)} {np.average(image)}")
         warped_img = image_trapezoidal_warping(
             image,
             X_stretching_in_pixels=13,
             Y_stretching_in_pixels=13)
         img_name = f"{output_sequence_prefix}/{image_name}"
-        logger.debug(f"Saving {img_name}")
+        logger.debug(f"Saving {img_name} {warped_img.dtype} {np.min(warped_img)} {np.max(warped_img)} {np.average(warped_img)}")
         cv2.imwrite(img_name, warped_img)
 
 if __name__ == "__main__":
