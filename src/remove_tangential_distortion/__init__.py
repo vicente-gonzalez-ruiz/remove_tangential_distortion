@@ -24,6 +24,8 @@ def image_trapezoidal_warping(image,
          X_stretching_in_pixels=13,
          Y_stretching_in_pixels=13):
 
+    filling_val = int(np.min(image))
+
     # Define the source rectangle (four corners of the rectangle)
     src = np.array([[0, 0],                          # Top-left corner
                     [image.shape[1], 0],             # Top-right corner
@@ -48,7 +50,10 @@ def image_trapezoidal_warping(image,
     matrix = cv2.getPerspectiveTransform(src, dst)
 
     # Apply the perspective transformation to the image
-    warped_image = cv2.warpPerspective(image, matrix, (image.shape[1], image.shape[0]+Y_stretching_in_pixels))
+    warped_image = cv2.warpPerspective(src=image,
+                                       M=matrix,
+                                       dsize=(image.shape[1], image.shape[0]+Y_stretching_in_pixels),
+                                       borderValue=filling_val)
     
     return warped_image
 
