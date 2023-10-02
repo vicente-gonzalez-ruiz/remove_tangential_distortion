@@ -11,7 +11,7 @@ logging.basicConfig(format="[%(filename)s:%(lineno)s %(funcName)s()] %(message)s
 #logger.setLevel(logging.ERROR)
 #logger.setLevel(logging.WARNING)
 logger.setLevel(logging.INFO)
-logger.setLevel(logging.DEBUG)
+#logger.setLevel(logging.DEBUG)
 
 try:
     from google.colab.patches import cv2_imshow
