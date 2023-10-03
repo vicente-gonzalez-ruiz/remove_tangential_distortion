@@ -57,7 +57,7 @@ def image_trapezoidal_warping(image,
     
     return warped_image
 
-def sequence_trapezoidal_warping(
+def __sequence_trapezoidal_warping(
         X_stretching_in_pixels=13,
         Y_stretching_in_pixels=13,
         input_sequence_prefix="/tmp/input",
